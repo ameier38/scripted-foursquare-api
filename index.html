@@ -26,11 +26,26 @@
         </div>
     </nav>
     <div class="container">
+        <div class="jumbotron">
+            <h1>Find Some Food!</h1>
+            <p>
+                Enter a food type and location below to find restaurants
+                using the Foursquare api.
+            </p>
+        </div>
         <div id="app">
             <input v-model="foodType" placeholder="food type">
             <input v-model="address" placeholder="address">
             <button v-on:click="find">Find</button>
             <p>{{ message }}</p>
+            <div class="row">
+                <div v-for="restaurant in store.restaurants" class="col-xs-3 card">
+                    <p>{{ restaurant.name }}</p>
+                    <a v-if="restaurant.url" v-bind:href="restaurant.url">Website</a>
+                    <p>{{ restaurant.location.address }}</p>
+                    <p>Check ins: {{ restaurant.stats.checkinsCount }}</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -39,6 +54,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-resource@1.0.3/dist/vue-resource.min.js"></script>
     <script src="app.js"></script>
 </body>
 
